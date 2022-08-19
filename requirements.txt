@@ -1,7 +1,0 @@
-gunicorn
-flask
-time
-cv2
-scipy
-collections
-numpy

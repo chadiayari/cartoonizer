@@ -9,7 +9,6 @@ argparse = "*"
 numpy = "*"
 scipy = "*"
 opencv-python = "*"
-gunicorn = "*"
 
 [dev-packages]
 

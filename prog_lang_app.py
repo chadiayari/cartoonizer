@@ -18,9 +18,7 @@ def list_programming_languages():
     output = makecartoon(img)
     end_time = time.time()
     # print("time: {0}s".format(end_time-start_time))
-   return jsonify({
-            "message": "Image Uploaded Successfully ",
-        })
+    return cv2.imwrite("output.jpg", output)
 
 def makecartoon(image):
     """
