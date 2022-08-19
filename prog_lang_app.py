@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 import time
 import cv2
 import numpy as np
@@ -9,15 +9,15 @@ app = Flask(__name__)
 
 @app.post('/programming_languages')
 def list_programming_languages():
-    imagefile = request.files['image']
-    image1 = cv2.imread("./first.png")
-    print("image 2",imagefile)
+    imagefile = request.files['image'].read()
+    npimg = np.fromstring(imagefile, np.uint8)
+    img = cv2.imdecode(npimg, cv2.IMREAD_UNCHANGED)
+
     # print('==============')
     start_time = time.time()
-    output = makecartoon(image)
+    output = makecartoon(img)
     end_time = time.time()
     # print("time: {0}s".format(end_time-start_time))
-    print("output",output)
     return cv2.imwrite("output.jpg", output)
 
 def makecartoon(image):
