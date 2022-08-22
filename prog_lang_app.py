@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify
 import time
 import cv2
 import numpy as np
+import base64
+from io import BytesIO
+from PIL import Image
 from scipy import stats
 from collections import defaultdict
 
@@ -18,7 +21,15 @@ def list_programming_languages():
     output = makecartoon(img)
     end_time = time.time()
     # print("time: {0}s".format(end_time-start_time))
-    return cv2.imwrite("output.jpg", output)
+    pil_img= Image.fromarray(output)
+    buff = BytesIO()
+    pil_img.save(buff,format="JPEG")
+    base64_image = base64.b64encode(buff.getvalue()).decode("utf-8")
+    return jsonify(
+        {
+            "image" : base64_image
+        }
+    )
 
 def makecartoon(image):
     """
